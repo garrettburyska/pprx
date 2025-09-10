@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { FaXTwitter, FaInstagram, FaYoutube, FaDiscord } from "react-icons/fa6";
 
 const HOVERCLASS = "hover:text-[#ffe239]";
 const ACTIVECLASS = "text-[#ffe239]";
@@ -14,6 +15,13 @@ const LINKS = [
     { href: "/contact", label: "Contact" },
 ];
 
+const SOCIALS = [
+    { href: "https://twitter.com/", label: "X", icon: <FaXTwitter /> },
+    { href: "https://instagram.com/", label: "Instagram", icon: <FaInstagram /> },
+    { href: "https://youtube.com/", label: "YouTube", icon: <FaYoutube /> },
+    { href: "https://discord.com/", label: "Discord", icon: <FaDiscord /> },
+];
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -22,22 +30,37 @@ const Navbar = () => {
     return (
         <nav className="bg-black shadow-md text-white font-bold">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex-shrink-0 flex items-center">
-                        <a href="/" className={`text-xl font-bold ${HOVERCLASS}`}>RYSK</a>
+                <div className="flex justify-between items-center h-20">
+                    {/* Left: Logo and Links */}
+                    <div className="flex items-center space-x-8">
+                        <a href="/" className={`text-3xl font-extrabold tracking-wide ${HOVERCLASS}`}>RYSK</a>
+                        <div className="hidden lg:flex space-x-6 items-center">
+                            {LINKS.map(link => (
+                                <a
+                                    key={link.href}
+                                    href={link.href}
+                                    className={`${HOVERCLASS} ${location.pathname === link.href ? ACTIVECLASS : ""}`}
+                                >
+                                    {link.label}
+                                </a>
+                            ))}
+                        </div>
                     </div>
-                    <div className="hidden md:flex space-x-4 items-center">
-                        {LINKS.map(link => (
+                    {/* Right: Socials */}
+                    <div className="hidden lg:flex items-center space-x-4">
+                        {SOCIALS.map(social => (
                             <a
-                                key={link.href}
-                                href={link.href}
-                                className={`${HOVERCLASS} ${location.pathname === link.href ? ACTIVECLASS : ""}`}
+                                key={social.label}
+                                href={social.href}
+                                className="px-2 py-1 rounded hover:bg-[#ffe239] hover:text-black transition"
+                                aria-label={social.label}
                             >
-                                {link.label}
+                                {social.icon}
                             </a>
                         ))}
                     </div>
-                    <div className="flex items-center md:hidden">
+                    {/* Mobile menu button */}
+                    <div className="flex items-center lg:hidden">
                         <button onClick={toggleMenu} className="focus:outline-none">
                             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 {isOpen ? (
@@ -50,17 +73,32 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+            {/* Mobile menu */}
             {isOpen && (
-                <div className="md:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-1 pb-4">
-                    {LINKS.map(link => (
-                        <a
-                            key={link.href}
-                            href={link.href}
-                            className={`block ${HOVERCLASS} ${location.pathname === link.href ? ACTIVECLASS : ""}`}
-                        >
-                            {link.label}
-                        </a>
-                    ))}
+                <div className="lg:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+                    <div className="space-y-1">
+                        {LINKS.map(link => (
+                            <a
+                                key={link.href}
+                                href={link.href}
+                                className={`block ${HOVERCLASS} ${location.pathname === link.href ? ACTIVECLASS : ""}`}
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+                    <div className="flex space-x-4 mt-4">
+                        {SOCIALS.map(social => (
+                            <a
+                                key={social.label}
+                                href={social.href}
+                                className="py-1 rounded hover:bg-[#ffe239] hover:text-black transition"
+                                aria-label={social.label}
+                            >
+                                {social.icon}
+                            </a>
+                        ))}
+                    </div>
                 </div>
             )}
         </nav>
