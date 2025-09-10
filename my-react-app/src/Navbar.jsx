@@ -33,7 +33,7 @@ const Navbar = () => {
                 <div className="flex justify-between items-center h-20">
                     {/* Left: Logo and Links */}
                     <div className="flex items-center space-x-8">
-                        <a href="/" className={`text-3xl font-extrabold tracking-wide ${HOVERCLASS}`}>RYSK</a>
+                        <a href="/" className={`text-3xl font-extrabold tracking-wide ${HOVERCLASS}`}>RSG</a>
                         <div className="hidden lg:flex space-x-6 items-center">
                             {LINKS.map(link => (
                                 <a
