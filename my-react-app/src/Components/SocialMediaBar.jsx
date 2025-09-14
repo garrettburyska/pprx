@@ -8,7 +8,7 @@ const SocialMediaBar = ({ socials }) => {
                     key={social.label}
                     href={social.href}
                     target="_blank"
-                    className="py-1 rounded hover:text-[#ffe239]"
+                    className="hover:text-[#ffe239]"
                     aria-label={social.label}
                 >
                     {social.icon}

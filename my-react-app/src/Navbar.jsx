@@ -7,7 +7,6 @@ const HOVERCLASS = "hover:text-[#ffe239]";
 const ACTIVECLASS = "text-[#ffe239]";
 
 const LINKS = [
-    { href: "/shop", label: "SHOP" },
     { href: "/about", label: "ABOUT" },
     { href: "/team", label: "TEAM" },
     { href: "/creators", label: "CREATORS" },
@@ -33,7 +32,7 @@ const Navbar = () => {
     const location = useLocation();
 
     return (
-        <nav className="bg-black shadow-md text-white font-bold">
+        <nav className="bg-black shadow-md text-white font-bold sticky top-0 z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
                     {/* Left: Logo and Links */}
